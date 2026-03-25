@@ -1,0 +1,90 @@
+---
+title: 'AI Wont Build Your App - You Will'
+date: '2025-01-08'
+lastmod: '2025-01-08'
+tags: ['AI']
+draft: false
+summary: 'Practical guide to using AI for coding. What its actually good at. What it fails at. How to ship without the hype.'
+images: ['/static/images/og-card.png']
+---
+
+## Introduction
+
+You've probably heard the hype: "Build apps faster with AI, Ship products in days!" The reality is messier. AI is a powerful coding assistant that handles specific tasks well. But it just doesn't build apps magically for you. It won't replace understanding architecture, actual design of app, debugging production issues, or thinking through user needs.
+
+This article covers what actually works when using AI to develop a full application, from planning to deployment. Skip the marketing copy. Here are the practices that save time and prevent disaster.
+
+## What AI is Actually Good At
+
+**Scaffolding and boilerplate.** AI excels at generating repetitive code structure. Setting up authentication flows, API endpoints, database migrations, form validation—these are fast. You describe what you need, it writes the plumbing. You spend seconds reviewing instead of minutes typing.
+
+**Junior developer work.** Implementing straightforward features, fixing obvious bugs, writing tests for existing code. AI handles the mechanical parts of coding. This is genuinely useful and doesn't require much oversight.
+
+**Pattern lookups.** You've forgotten the exact React hook pattern or the right way to structure a Node.js middleware? Ask. Faster than searching Stack Overflow.
+
+**Refinement.** Once you have working code, AI can refactor for clarity, add error handling, optimize database queries. It's a good second pass tool.
+
+## What AI Fails At
+
+**Architecture decisions.** Choosing between a monolith and microservices, deciding where to put state, designing data schemas for scale—these require judgment. AI gives you plausible options, not the right one for your constraints and team.
+
+**Understanding user problems.** AI doesn't know your users. You do. The feature it generates might be technically correct but worthless. You have to drive this.
+
+**Integration chaos.** Three libraries fighting over global state. A payment API that doesn't do what the docs claim. An obscure race condition between database writes and cache invalidation. You'll find these problems in production. AI can't anticipate them.
+
+**Debugging production.** When something breaks in production with real data, at scale, with millions of rows in the database—you need deep understanding of your system. AI can suggest fixes. You have to know if they're right.
+
+**Taste and design.** Your app needs to feel good. Fast. Intuitive. That's a human decision. AI generates generic versions of everything. You polish it.
+
+## The Practice: How to Actually Use AI
+
+**Use it for velocity on known problems.** You understand what you're building. You know the tech stack. You just don't want to type it. AI writes the code fast. You review thoroughly because you understand the domain.
+
+Start with clear specifications, not vague requests. "Create a form with email, password, name fields with validation" gets better results than "make a signup form." The better the spec, the better the code.
+
+**Don't trust output, verify it.** Every function AI generates needs review. Check for logic errors, performance issues, security flaws. Assume it's wrong until you've read it carefully. A junior developer would have the same code reviewed—apply the same standard.
+
+**Use it for tests after you write code.** You write a feature. It's working locally. AI generates test cases for the happy path and common failures. This is reliable and saves time. It's much better at writing test code than production code because test logic is more formulaic.
+
+**Stub out the hard parts yourself, then let AI fill in.** Draw the architecture on paper first. Where does data flow? What are the critical failure points? What can't go wrong? Map those out. Then use AI for the filling-in work—the implementations within that structure.
+
+**Keep a human in the loop for integration.** Third-party APIs, payment processors, authentication services—always have a senior person review the integration. AI misses edge cases and doesn't understand rate limits, error codes, or the undocumented quirks that matter.
+
+## What Takes Time (and AI Won't Save You)
+
+**Understanding requirements takes time.** You need to interview users, build prototypes, validate the idea. This is months of work for most products. AI doesn't help here.
+
+**Design takes time.** User interface, user experience, information architecture—these require iteration with real users. AI can mock things up, but you're making the real decisions.
+
+**Testing takes time.** Automated tests are easier with AI. But you still need to run them, debug failures, and write manual test plans for edge cases. You still need to actually use the product.
+
+**Deployment and operations take time.** Setting up monitoring, configuring servers, managing databases, handling scaling—this is often more time than the code itself. AI can help write the configuration, but you're responsible for it working.
+
+**Communication and planning take time.** Discussing features with stakeholders, managing scope, saying no to requests, coordinating with others—this is where most projects slow down or fail. AI doesn't help.
+
+## Practical Checklist
+
+- **Define requirements first.** Write down what you're building before you touch code. AI works better with constraints.
+
+- **Sketch architecture.** One hour on a whiteboard saves days of refactoring. Show AI the map, then ask it to implement sections.
+
+- **Review all generated code.** Read it like you're paying for it with your own money. You're responsible for bugs.
+
+- **Test as you go.** Generate test cases, but run them. Don't assume they pass until they do.
+
+- **Have one person who understands the whole system.** This is you if you're solo. It's critical when things break.
+
+- **Deploy early and small.** Get to production fast, with limited features. This is where you learn what's actually wrong, and no AI can predict that.
+
+- **Own the integrations.** Third-party code is a risk surface. Have a senior person review it or understand it deeply yourself.
+
+## The Bottom Line
+
+AI accelerates the coding phase of development. It's genuinely faster. But coding is maybe 30% of building a real product. The other 70%—planning, design, testing, integration, operations, and understanding what users actually need—is still on you.
+
+Use AI to avoid writing boilerplate. Don't use it as an excuse to skip thinking about what you're building. The developers who ship working products are the ones who understand their systems deeply. AI helps you write code faster. It doesn't help you understand the problem faster.
+
+Be practical. Review carefully. Stay skeptical. That's how you ship.
+
+
+

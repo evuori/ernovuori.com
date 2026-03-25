@@ -1,0 +1,101 @@
+---
+title: 'The Economics of Training Large Language Models: From 20B to 120B Parameters'
+date: '2025-11-25'
+lastmod: '2025-11-25'
+tags: ['AI']
+draft: false
+summary: 'A comprehensive breakdown of LLM training costs, covering GPU infrastructure requirements, cost analysis for 20B and 120B parameter models, deployment considerations, and practical optimization strategies to reduce expenses while maintaining performance.'
+images: ['/static/images/og-card.png']
+---
+
+## Introduction
+
+Training large language models requires significant computational resources and careful budget planning. This analysis breaks down the costs for models ranging from 20 billion to 120+ billion parameters, helping organizations make informed decisions about LLM development.
+
+<TOCInline toc={props.toc} exclude="Introduction" />
+
+## Cost Comparison: 20B vs 120B Models
+
+### GPT-OSS 20B
+
+Mid-sized models offer a balance between capability and cost efficiency.
+
+**Training specifications:**
+- **Hardware**: 8-16 A100 80GB GPUs
+- **Training time**: 2-4 weeks (336-672 GPU-hours per GPU, ~5,000-10,000 total GPU-hours)
+- **Dataset**: 300-500B tokens (~1.5TB preprocessed)
+- **Compute cost**: $50,000-$100,000
+  - Base compute: ~$22,000 (16 A100s × $2.75/hr × 500 hours)
+  - With failed runs, experimentation, checkpointing: 2-3x base cost
+- **Cloud pricing**: AWS P4de ~$2.75/GPU-hour, alternatives $1-2/GPU-hour
+- **Best for**: Organizations with moderate budgets and specific use cases
+
+### GPT-OSS 120B
+
+Large-scale models deliver state-of-the-art performance at significantly higher costs.
+
+**Training specifications:**
+- **Hardware**: 256-512 H100 80GB GPUs (or 512+ A100s)
+- **Training time**: 1-3 months (720-2,160 hours, ~180,000-500,000 total GPU-hours)
+- **Dataset**: 1-2T tokens (~5-10TB preprocessed)
+- **Compute cost**: $3M-$8M
+  - Base compute: ~$1.4M (256 H100s × $3.90/hr × 1,440 hours)
+  - With experimentation, failed runs, hyperparameter tuning: 2-4x base cost
+  - Alternative: 512 A100s × $2.75/hr × 1,440 hours = ~$2M base
+- **Cloud pricing**: AWS P5 H100 ~$3.90/GPU-hour (down from $12.29 pre-2025)
+- **Best for**: Well-resourced teams pursuing cutting-edge capabilities
+
+## Key Cost Factors
+
+### Infrastructure
+- **GPU compute**:
+  - AWS: A100 ~$2.75/GPU-hour, H100 ~$3.90/GPU-hour (2025 pricing)
+  - Alternative providers: $1-2/GPU-hour (A100), $2-3/GPU-hour (H100)
+  - On-premise: $15-17k per A100, $25-40k per H100 (plus infrastructure)
+- **Storage**:
+  - Dataset: 1-10TB preprocessed training data
+  - Checkpoints: 100GB-1TB per checkpoint, saved every few hours
+  - Total: 5-50TB depending on model size
+- **Network**: 400-800Gbps InfiniBand/NVLink for multi-node training
+
+### Personnel
+- ML engineers and researchers
+- Infrastructure and DevOps teams
+- Data preparation specialists
+
+### Hidden Costs
+- **Failed training runs**: 20-30% of compute budget lost to crashes and bugs
+- **Hyperparameter tuning**: 3-5 pilot runs at 10-20% scale before full training
+- **Experimentation**: Testing data pipelines, batch sizes, learning rates
+- **Monitoring**: Engineering time for watching training stability (weeks/months)
+- **Data preparation**: Cleaning, deduplication, filtering can take months
+
+## Deployment and Optimization
+
+### Reducing Training Costs
+- **Mixed precision training**: Faster training with lower memory
+- **Gradient checkpointing**: Memory efficiency at slight compute cost
+- **Parameter-efficient fine-tuning**: LoRA and adapter methods
+- **Spot instances**: Save 60-70% with proper checkpointing
+
+### Deployment Considerations
+- **Inference costs**: Ongoing GPU requirements for serving
+- **Optimization techniques**: Quantization and distillation reduce serving costs
+- **Scaling strategy**: Balance latency requirements with infrastructure costs
+
+## Making the Decision
+
+Consider these factors before committing to LLM development:
+
+1. **Use case specificity**: Do you need a custom model or will existing solutions work?
+2. **Budget reality**: Can you sustain both training and deployment costs?
+3. **Time to market**: Development time represents significant opportunity cost
+4. **Competitive advantage**: Does owning the model provide strategic value?
+5. **Alternatives**: Compare against API costs for existing models
+
+## Conclusion
+
+LLM training costs range from tens of thousands to millions of dollars. The decision to train custom models should be based on clear business requirements, not trends. For many use cases, fine-tuning existing models or using APIs provides better ROI than full pre-training.
+
+As techniques evolve and hardware improves, costs continue to shift. Stay informed about efficient training methods and carefully evaluate whether custom model development aligns with your strategic objectives and budget constraints.
+

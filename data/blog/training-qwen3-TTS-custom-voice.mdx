@@ -1,0 +1,68 @@
+---
+title: 'Resurrecting Kekkonen: Training Qwen3-TTS Custom Voice'
+date: '2026-01-06'
+lastmod: '2026-02-06'
+tags: ['llm', 'text-to-speech', 'qwen3']
+draft: false
+summary: "I fine-tuned a text-to-speech model to sound like Finland's former president using his 1975 New Year's speech and a MacBook M4. Spoiler: it mostly worked, but Finnish pronunciation needs GPU love."
+images: ['/static/images/og-card.png']
+---
+
+## Introduction
+
+Ever wanted to hear a historical figure speak in modern contexts? Yeah, me too. So I decided to train Qwen3-TTS to sound like Urho Kekkonen, Finland's long-serving president, using his iconic 1975 New Year's speech as training data.
+
+The catch? I did this on a MacBook M4 with 24GB RAM. No fancy A100s. No cloud GPU clusters. Just me, my Mac, some ambition, and questionable decision-making skills.
+
+## The Setup: Teaching Qwen3-TTS About macOS
+
+First problem: Qwen3-TTS didn't support macOS Metal Performance Shaders (MPS) out of the box. Since I wasn't about to rent a GPU farm, I rolled up my sleeves and [added MPS support myself](https://github.com/QwenLM/Qwen3-TTS/pull/124). (Yes, it is not merged yet. hurry up Qwen team.)
+
+## The Training Data: A Presidential Speech Meets DIY Audio Engineering
+
+I didn't have access to massive audio datasets or professional recording studios. So I did what anyone with determination and questionable free time would do: I manually recorded 5-10 second audio clips, transcribed them, and used those as training data. I also snapped 10 second Kekkonen speech to be used as voice clone.
+
+It was tedious. It was repetitive. It was exactly how many of history's great achievements began (hah).
+
+## The Results: Kekkonen Lives Again (Sort Of)
+
+The good news: **you can absolutely hear Kekkonen's voice**. The characteristic cadence, the Finnish pronunciation patterns, the gravitas—it's all there.
+
+The bad news: Due to the minimalist training dataset (GPU constraints, not laziness), the Finnish articulation isn't *perfect*. Some pronunciations are rough around the edges. But hey, that's what happens when you try to resurrect presidential authority with consumer hardware and prayer.
+
+### Hear It Yourself
+
+Here are two example outputs from the trained model:
+
+**Example 1:**
+<audio controls>
+  <source src="/audio/test_kekkonen_0.wav" type="audio/wav" />
+  Your browser does not support the audio element.
+</audio>
+
+**Example 2:**
+<audio controls>
+  <source src="/audio/test_kekkonen_2.wav" type="audio/wav" />
+  Your browser does not support the audio element.
+</audio>
+
+**Example 3:**
+<audio controls>
+  <source src="/audio/test_kekkonen_3.wav" type="audio/wav" />
+  Your browser does not support the audio element.
+</audio>
+
+Notice the unmistakable Kekkonen cadence and vocal character. The training worked. The GPU jealousy was worth it.
+
+## Key Takeaways
+
+- **MPS support matters**: Bringing TTS training to macOS opens doors for ML work outside data centers
+- **You don't need massive training sets** to get recognizable results, but you do need *some*
+- **24GB RAM on M4 is the real MVP** (though it does complain about it)
+- **Fine-tuning vs. full training**: We're not reinventing TTS here, just adapting it to a voice
+
+## What's Next?
+
+With proper GPU access and a complete training dataset, you could get near-perfect Finnish pronunciation and smoother voice synthesis. For now, though, Kekkonen's digital resurrection is serving its purpose: proof that you don't need a Fortune 500 budget to do cool ML experiments.
+
+Next I probably dig little bit deeper to improve model for more natural Finnish speech. Stay tuned (and be careful out there).
