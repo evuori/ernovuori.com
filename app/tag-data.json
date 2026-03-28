@@ -1,8 +1,9 @@
 {
-  "ai": 3,
-  "apex": 1,
-  "methodology": 1,
-  "software-development": 1,
+  "ai": 4,
+  "agile": 1,
+  "methodology": 2,
+  "apex": 2,
+  "software-development": 2,
   "llm": 1,
   "text-to-speech": 1,
   "qwen3": 1
