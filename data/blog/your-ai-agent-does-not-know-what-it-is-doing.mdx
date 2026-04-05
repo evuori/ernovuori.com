@@ -80,82 +80,15 @@ An audit log you can modify is not an audit log. This is obvious and yet I have 
 
 An agent that declares it is summarising a document should not, partway through the session, start making API calls to external services, reading files it didn't declare as resources, or making 800 tool calls when the task should take 12. These are signals. Without continuous monitoring of session behaviour against the declared task manifest, you have no way to detect them.
 
-## Skaldic Traust: The Architecture
+## Skaldic Traust
 
-I built [Skaldic Traust](https://github.com/skaldic-ai/skaldic-traust) (TBAC - Task-Based Access Control) as an authorization and control plane for AI agents. A security layer that sits between agents and everything they can touch.
+I built [Skaldic Traust](https://github.com/skaldic-ai/skaldic-traust) as an authorization and control plane for AI agents - a security layer that sits between agents and everything they can touch.
 
-Here is what it actually does.
+The core idea is TBAC: Task-Based Access Control. Before an agent does anything, it declares its intent. The system evaluates that declaration against policy and issues a short-lived capability token scoped to that task. Every tool call goes through a proxy that validates the token, runs guardrails, and writes an append-only audit event. When the task ends, the token expires. The agent holds nothing.
 
-**The gateway**
+Policies are Rego files in version control, not a database table, not a system prompt. The audit trail includes the policy version (git commit hash) that produced every decision, so historical events can be replayed against the exact rules that governed them. Credentials are never held by the agent; a vault injects short-lived secrets just-in-time at the moment of tool execution.
 
-There is one entry point. One. Every agent authenticates through `traust-gateway`. No agent ever talks directly to a tool, a database, or an external API. This is a structural constraint, not a configuration option. The SDK makes it transparent to agent authors, but the proxy is not bypassable by design.
-
-**The decision engine**
-
-`traust-tbac` is the decision-maker. When an agent opens a session, it submits a task manifest: what task type, which user it is acting for, what resources it expects to need. The engine assembles an input document and sends it to OPA (Open Policy Agent) for evaluation.
-
-Policies are Rego files committed to version control. Not a database table. Not a YAML blob. Not a system prompt. Policy-as-code means the same review and CI discipline as application code, you can diff it, test it, roll it back, and know exactly what changed between any two points in time.
-
-Policy layers evaluate in order: global baseline (deny by default) → task type policies → agent trust tiers → resource labels → break-glass exceptions. The output is not a boolean. It is a structured decision that includes what is allowed, what data filters apply, what the TTL is, and what conditions must hold throughout the session.
-
-If approved, the engine issues a short-lived JWT capability token with the task scope embedded in claims. Redis backs session state for fast revocation. The token may still be cryptographically valid but if the session has been killed in Redis, it fails validation. When the task ends, the token expires and the agent holds nothing.
-
-**The enforcement layer**
-
-`traust-proxy` is where decisions become physical reality. Every tool call hits the proxy. It validates the capability token (signature + session liveness), rewrites parameters to inject data filters transparently, runs the pre-execution guardrail pipeline, executes the tool, runs the post-execution guardrail pipeline, filters the output, and writes an append-only audit event.
-
-The agent never calls a tool directly. This is not advisory. The proxy is the only path.
-
-Guardrail pipeline, in order:
-
-| Stage | Phase | What it does |
-|---|---|---|
-| Schema | Pre-execution | Validates structural integrity of the request |
-| Rate | Pre-execution | Fixed-window call frequency against the task envelope |
-| Scope | Pre-execution | Verifies action matches the declared task manifest |
-| Injection | Pre-execution | Pattern-matches adversarial instructions in parameters |
-| Content | Post-execution | PII and sensitive data detection in output |
-| Drift | Post-execution | Session profile divergence from declared manifest |
-
-Cheap checks run first. Schema and rate are microsecond operations. Content scanning and drift analysis are more expensive. Failing fast avoids burning compute on requests that would be denied anyway. The guardrail engine is an in-process module not a separate service because enforcement must be synchronous. A network hop per call adds latency and creates a failure mode: guardrail service unreachable equals unguarded call. As a module, it is always available if the proxy is running.
-
-Violations have two outcomes: block (hard deny, typed exception to the agent) or escalate (session suspended, enters the operator review queue). Not all violations are malicious, escalation keeps humans in the loop for ambiguous cases without making the system unusable.
-
-**The credential vault**
-
-HashiCorp Vault injects short-lived credentials just-in-time at the moment of tool execution. Agents receive capability tokens. They never see the credentials behind them. A compromised agent cannot exfiltrate credentials it was never given.
-
-**Observability**
-
-The audit trail is append-only. Records are never updated or deleted. Every record includes the policy version (git commit hash) that produced the decision, historical events can be replayed against the exact rules that governed them.
-
-`traust-admin` serves the query interface: filterable audit history, session listing from Redis, escalation review (approve to resume a suspended session, reject to permanently revoke it). `traust-dashboard` is the operator web interface with active sessions, audit log, escalation queue, policy viewer, agent registry, live event feed via WebSocket.
-
-The live monitor publishes every audit event to a Redis pub/sub channel. The admin service subscribes and fans out to connected WebSocket clients. Operators see agent activity in real time.
-
-**Integration patterns**
-
-Integration depends on how much control you have over the agent code.
-
-- **Python SDK - own the agent code:** `import traust`, use `AgentSession`. Token management and proxy routing are transparent. Denials surface as typed exceptions (`SessionDeniedError`, `ToolDeniedError`, `EscalationPendingError`). The enforcement layer is invisible when things work correctly.
-- **Framework adapter - LangChain, LangGraph, CrewAI:** a thin hook into the framework's tool execution layer. Agent code unchanged.
-- **Sidecar - no control over agent code at all:** a container that intercepts outbound network calls and routes them through the proxy.
-
-All three patterns route through the same proxy and produce the same audit events.
-
-Audit-only mode is available regardless of integration pattern. Set `AUDIT_ONLY_MODE=true` on the proxy: denials are recorded as `would_deny` but calls succeed. Validate the audit trail against expected behaviour before enabling enforcement. Integrating teams need this from day one, not as a retrofit.
-
-**The stack**
-
-PostgreSQL for the audit log. Redis for session state and pub/sub. OPA for policy evaluation. HashiCorp Vault for credential injection. All open source. All cloud-agnostic. `docker compose up` gives a working system locally; the same stack runs in production on any OCI-compatible container infrastructure, cloud or on-premises. No Azure Key Vault. No managed identity. No cloud-native dependencies that evaporate when you change provider.
-
-## What This Is Not
-
-It is not an agent framework. It does not help you build agents or orchestrate them.
-
-It is not an LLM gateway. It does not handle model routing, cost management, or prompt templating.
-
-It is a security and control plane. Agents plug into it. Everything else is out of scope.
+It is not an agent framework. It is not an LLM gateway. It is a security and control plane. Agents plug into it. Everything else is out of scope.
 
 ## The Weekend Vibe-Coder Will Disagree
 
@@ -163,7 +96,7 @@ I know. This is a lot. The LinkedIn post promised zero experience required. I am
 
 Here is the thing though. The weekend vibe-coder is not wrong that you can build impressive things quickly now. They are wrong about where the complexity went. It did not disappear. It transferred. It transferred into the gap between "what you thought the agent would do" and "what the agent actually did." It transferred into the audit trail you don't have when something goes wrong. It transferred into the credentials the agent is holding that you forgot about. It transferred into the prompt injection in the third-party document that redirected the agent's behaviour. It transferred into the breach report you're writing at 2am wondering how an agent that was supposed to summarise documents ended up reading something it shouldn't have.
 
-Enterprise software has hard problems. AI does not make them easier — it makes them faster, more autonomous, and harder to reason about after the fact. The organizational pressure to ship AI capabilities is immense and getting more intense. The gap between that pressure and the engineering work required to do it safely is where incidents happen.
+Enterprise software has hard problems. AI does not make them easier, it makes them faster, more autonomous, and harder to reason about after the fact. The organizational pressure to ship AI capabilities is immense and getting more intense. The gap between that pressure and the engineering work required to do it safely is where incidents happen.
 
 Find out more: [Skaldic Traust on GitHub.](https://github.com/skaldic-ai/skaldic-traust)
 

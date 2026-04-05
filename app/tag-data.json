@@ -1,11 +1,11 @@
 {
   "ai": 5,
-  "security": 1,
-  "agile": 1,
-  "methodology": 2,
   "apex": 2,
+  "methodology": 2,
   "software-development": 2,
   "llm": 1,
   "text-to-speech": 1,
-  "qwen3": 1
+  "qwen3": 1,
+  "agile": 1,
+  "security": 1
 }
