@@ -25,6 +25,7 @@ export default function Art() {
     { src: '/static/images/art/IMG_3479.jpeg', alt: 'Art work' },
     { src: '/static/images/art/IMG_0902.jpeg', alt: 'Art work' },
     { src: '/static/images/art/IMG_E201CB12-C46D-4DB5-B257-F132F07665F7.jpeg', alt: 'Art work' },
+    { src: '/static/images/art/IMG_2518F4FE-CF27-48EF-AE8A-BE4FD485EE29.jpeg', alt: 'Art work' },
   ]
 
   return (
