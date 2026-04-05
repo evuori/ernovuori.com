@@ -35,7 +35,7 @@ export default function Home({ posts }) {
             src="/static/images/art/IMG_2552copy.jpeg"
             alt="Art"
             fill
-            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            className="object-cover object-center grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
           />
           <div className="absolute inset-0 bg-black/50 transition-colors group-hover:bg-black/30" />
           <span className="font-bebas absolute bottom-6 left-6 text-5xl tracking-widest text-white">
@@ -47,7 +47,7 @@ export default function Home({ posts }) {
             src="/static/images/vakava/CZ0A7566.jpg"
             alt="Music"
             fill
-            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            className="object-cover object-center grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
           />
           <div className="absolute inset-0 bg-black/50 transition-colors group-hover:bg-black/30" />
           <span className="font-bebas absolute bottom-6 left-6 text-5xl tracking-widest text-white">
@@ -59,7 +59,7 @@ export default function Home({ posts }) {
             src="/static/images/profile_avatar.jpeg"
             alt="Erno Vuori"
             fill
-            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            className="object-cover object-center grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
           />
           <div className="absolute inset-0 bg-black/50 transition-colors group-hover:bg-black/30" />
           <span className="font-bebas absolute bottom-6 left-6 text-5xl tracking-widest text-white">
