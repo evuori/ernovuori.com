@@ -1,4 +1,3 @@
-import Image from '@/components/Image'
 import PhotoCarousel from '@/components/PhotoCarousel'
 import { genPageMetadata } from 'app/seo'
 
@@ -24,6 +23,8 @@ export default function Art() {
     { src: '/static/images/art/IMG_3348.jpeg', alt: 'Art work' },
     { src: '/static/images/art/IMG_3478.jpeg', alt: 'Art work' },
     { src: '/static/images/art/IMG_3479.jpeg', alt: 'Art work' },
+    { src: '/static/images/art/IMG_0902.jpeg', alt: 'Art work' },
+    { src: '/static/images/art/IMG_E201CB12-C46D-4DB5-B257-F132F07665F7.jpeg', alt: 'Art work' },
   ]
 
   return (
