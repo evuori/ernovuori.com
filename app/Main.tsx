@@ -18,11 +18,11 @@ export default function Home({ posts }) {
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-          <div className="absolute right-0 bottom-0 left-0 px-6 py-12 md:px-12 md:py-16">
-            <p className="max-w-2xl text-xl leading-relaxed text-gray-200 md:text-2xl">
-              Architecting AI Solutions. Painting ancient darkness. Composing music between worlds.
-              Beating Bass Guitar
+          <div className="absolute inset-0 bg-black/25 dark:bg-black/35" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-950" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+            <p className="font-bebas text-3xl tracking-widest text-white/80 drop-shadow md:text-4xl lg:text-5xl">
+              See clearly. Feel deeply. Create.
             </p>
           </div>
         </div>
@@ -35,7 +35,7 @@ export default function Home({ posts }) {
             src="/static/images/art/IMG_2552copy.jpeg"
             alt="Art"
             fill
-            className="object-cover object-center grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            className="object-cover object-center transition-all duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/50 transition-colors group-hover:bg-black/30" />
           <span className="font-bebas absolute bottom-6 left-6 text-5xl tracking-widest text-white">
@@ -47,7 +47,7 @@ export default function Home({ posts }) {
             src="/static/images/vakava/CZ0A7566.jpg"
             alt="Music"
             fill
-            className="object-cover object-center grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            className="object-cover object-center transition-all duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/50 transition-colors group-hover:bg-black/30" />
           <span className="font-bebas absolute bottom-6 left-6 text-5xl tracking-widest text-white">
@@ -59,7 +59,7 @@ export default function Home({ posts }) {
             src="/static/images/profile_avatar.jpeg"
             alt="Erno Vuori"
             fill
-            className="object-cover object-center grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            className="object-cover object-center transition-all duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/50 transition-colors group-hover:bg-black/30" />
           <span className="font-bebas absolute bottom-6 left-6 text-5xl tracking-widest text-white">
