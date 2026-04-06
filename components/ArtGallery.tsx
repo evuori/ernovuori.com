@@ -77,10 +77,14 @@ export default function ArtGallery({ images }: ArtGalleryProps) {
 
       {/* Lightbox */}
       {lightboxIndex !== null && (
-        <button
-          type="button"
+        <div
+          role="button"
+          tabIndex={0}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/96"
           onClick={closeLightbox}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') closeLightbox()
+          }}
           aria-label="Close lightbox"
         >
           {/* Close */}
@@ -159,7 +163,7 @@ export default function ArtGallery({ images }: ArtGalleryProps) {
           <div className="absolute bottom-4 text-sm text-white/40">
             {lightboxIndex + 1} / {images.length}
           </div>
-        </button>
+        </div>
       )}
     </>
   )

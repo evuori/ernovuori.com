@@ -10,145 +10,127 @@ export const metadata = genPageMetadata({
 const images = [
   {
     src: '/static/images/art/IMG_2518F4FE-CF27-48EF-AE8A-BE4FD485EE29.jpeg',
-    alt: 'Vegvisir',
-    description:
-      "Odin's gaze above the Vegvisir — the Norse compass that guides through storms unseen. Ancient, vast, and watching.",
+    alt: 'Suojaväki (2026)',
+    description: 'Suojaväki (2026)',
     width: 1920,
     height: 2561,
   },
   {
     src: '/static/images/art/3F7A9EE6-6591-474D-836B-B9F927C1EBE0.jpg',
-    alt: 'Ragnarök',
-    description:
-      'Paint falls like fire through collapsing worlds. Every color rains down at once — destruction and creation indistinguishable in the chaos of the fall.',
+    alt: 'Check my Brain (2022)',
+    description: 'Check my Brain (2022)',
     width: 1920,
     height: 1559,
   },
   {
     src: '/static/images/art/IMG_3479.jpeg',
-    alt: 'Return',
-    description:
-      'A pale figure reaches toward a turning light. Swallowed by green, the body barely holds its form — spirit mid-transformation, or arriving from somewhere very far.',
+    alt: 'Green Peoples (2021)',
+    description: 'Green Peoples (2021)',
     width: 1912,
     height: 1920,
   },
   {
     src: '/static/images/art/0DF3E12E-624E-4253-B558-12D1C5F6CE50.jpg',
-    alt: 'The Bleeding Rune',
-    description:
-      'A primordial rune bleeds crimson through ash and shadow. At its base, a silent forest watches — witness to something ancient and irreversible.',
+    alt: 'Raven (2020)',
+    description: 'Raven (2020)',
     width: 1429,
     height: 1920,
   },
   {
     src: '/static/images/art/IMG_0902.jpeg',
-    alt: 'The Three',
-    description:
-      'Three faces open their mouths simultaneously. Raw, mask-like, unignorable — they speak in a register older than language.',
+    alt: 'no_name (2026)',
+    description: 'no_name (2026)',
     width: 1920,
     height: 1559,
   },
   {
     src: '/static/images/art/IMG_3155.jpeg',
-    alt: 'The Burst',
-    description:
-      'An explosion caught at its absolute peak. Whether destruction or flowering depends entirely on what the viewer brings to the moment.',
+    alt: 'In the beginning (2024)',
+    description: 'In the beginning (2024)',
     width: 1561,
     height: 1920,
   },
   {
     src: '/static/images/art/IMG_1364.jpeg',
-    alt: 'Battle Horizon',
-    description:
-      'A storm of marks tears across the dark. White and red trace the path of something that moved too fast to be anything but fury.',
+    alt: 'The Chase (2021)',
+    description: 'The Chase (2021)',
     width: 1920,
     height: 1060,
   },
   {
     src: '/static/images/art/C7E89C33-3CAF-4C54-911E-F7E09C75EE85.jpg',
-    alt: 'Cave Mind',
-    description:
-      'Ancient marks crowd a darkened skull. These are not letters but impulses — the deep grammar the unconscious speaks before language takes over.',
+    alt: 'Witch and Drum (2022)',
+    description: 'Witch and Drum (2022)',
     width: 1536,
     height: 1920,
   },
   {
     src: '/static/images/art/IMG_1512.jpeg',
-    alt: 'Shamanic Memory',
-    description:
-      'A dreamscape built from earth and amber. Totems, eyes, and half-remembered tools surface from the warm dark — archaeology of the unconscious.',
+    alt: 'Erotic Nightmare (2022)',
+    description: 'Erotic Nightmare (2022)',
     width: 1920,
     height: 1617,
   },
   {
     src: '/static/images/art/E8D6E0FF-FB89-4290-AA5F-57548DDFF9C1.jpg',
-    alt: 'The Living Knot',
-    description:
-      'Black lines breathe through gold in long, unbroken arcs. Neither plant nor beast nor human — something older that contains all three.',
+    alt: 'The Path (2020)',
+    description: 'The Path (2020)',
     width: 1433,
     height: 1920,
   },
   {
     src: '/static/images/art/IMG_2877.jpeg',
-    alt: 'The Red Center',
-    description:
-      'Two forces flank a bleeding line. The red streak refuses composition — it is sacrifice, wound, and presence at once.',
+    alt: 'Two of a Kind (2023)',
+    description: 'Two of a Kind (2023)',
     width: 1920,
     height: 1912,
   },
   {
     src: '/static/images/art/IMG_2552copy.jpeg',
-    alt: 'The Wheel',
-    description:
-      'A ring of runes glows at the center of the dark. Part compass, part ritual seal — the symbols resist translation, asking instead to be felt.',
+    alt: 'The Time (2024)',
+    description: 'The Time (2024)',
     width: 1920,
     height: 1506,
   },
   {
     src: '/static/images/art/IMG_1440.jpeg',
-    alt: 'One Cut',
-    description:
-      'Black scatters across silence while a single red line divides everything. The most is said with the least.',
+    alt: 'Blood in Vains',
+    description: 'Blood in Vains (2023)',
     width: 1920,
     height: 1440,
   },
   {
     src: '/static/images/art/IMG_3348.jpeg',
-    alt: 'Through the Forest',
-    description:
-      'Copper verticals rain down, punctuated by scattered color. A forest seen from the inside — or from very far above. Both distances hold.',
+    alt: 'The Story of Me (2022)',
+    description: 'The Story of Me (2022)',
     width: 1920,
     height: 1500,
   },
   {
     src: '/static/images/art/IMG_1490.jpeg',
-    alt: 'Ember Storm',
-    description:
-      'Fire becomes texture. Orange and gold flare in dense vertical strands against black — the moment a bonfire crosses into something uncontrollable.',
+    alt: 'no_name (2023)',
+    description: 'no_name (2022)',
     width: 1920,
     height: 1104,
   },
   {
     src: '/static/images/art/IMG_3478.jpeg',
-    alt: 'Confrontation',
-    description:
-      'Figures emerge from blue-black in fragments of yellow and red. A visual argument between forces, unresolved — the painting refuses to settle.',
+    alt: 'Erotic Daydream (2022)',
+    description: 'Erotic Daydream (2022)',
     width: 1920,
     height: 1917,
   },
   {
     src: '/static/images/art/IMG_2880.jpeg',
-    alt: 'Jazz',
-    description:
-      "Instruments dissolve into pure yellow energy. Keys, strings, brass — the painting doesn't depict music so much as become it.",
+    alt: 'The Bird (2023)',
+    description: 'The Bird (2023)',
     width: 1920,
     height: 1541,
   },
   {
     src: '/static/images/art/IMG_E201CB12-C46D-4DB5-B257-F132F07665F7.jpeg',
-    alt: 'The Banquet',
-    description:
-      'A plague doctor dines with ceremony. The staging — chains, rope, a severed head as centerpiece — turns dark absurdism into something genuinely unsettling.',
+    alt: 'no_name (2025)',
+    description: 'no_name (2025)',
     width: 1627,
     height: 1920,
   },
